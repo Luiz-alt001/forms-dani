@@ -428,10 +428,9 @@
     btnEnviar.textContent = 'Enviando...';
 
     try {
-      const resposta = await fetch(ENDPOINT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(dados)
+      const params = new URLSearchParams(dados);
+      const resposta = await fetch(`${ENDPOINT_URL}?${params.toString()}`, {
+        method: 'GET'
       });
       const resultado = await resposta.json();
 
