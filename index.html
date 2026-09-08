@@ -331,7 +331,7 @@
 </div>
 
 <script>
-  const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbx0FFb4ComIiE-8RfG4WbzZEguvCijDmZzJQu7mJIzG7n6qZI1HW0PAqqQm_gv66-vxPw/exec";
+  const ENDPOINT_URL = "COLE_AQUI_A_URL_DO_SEU_WEB_APP";
 
   const form = document.getElementById('formInscricao');
   const btnEnviar = document.getElementById('btnEnviar');
@@ -404,6 +404,33 @@
     });
   }
 
+  function enviarViaJSONP(dados){
+    return new Promise((resolve, reject) => {
+      const callbackName = 'cbInscricao_' + Date.now();
+      const timeout = setTimeout(() => {
+        limpar();
+        reject(new Error('Tempo esgotado'));
+      }, 12000);
+
+      function limpar(){
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        clearTimeout(timeout);
+      }
+
+      window[callbackName] = (resultado) => {
+        limpar();
+        resolve(resultado);
+      };
+
+      const params = new URLSearchParams({ ...dados, callback: callbackName });
+      const script = document.createElement('script');
+      script.src = `${ENDPOINT_URL}?${params.toString()}`;
+      script.onerror = () => { limpar(); reject(new Error('Falha ao carregar')); };
+      document.body.appendChild(script);
+    });
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const dados = {
@@ -418,7 +445,7 @@
 
     if (!validarFormulario(dados)) return;
 
-    if (ENDPOINT_URL === "COLE_AQUI_A_URL_DO_SEU_WEB_APP"){
+    if (ENDPOINT_URL === "https://script.google.com/macros/s/AKfycbx0FFb4ComIiE-8RfG4WbzZEguvCijDmZzJQu7mJIzG7n6qZI1HW0PAqqQm_gv66-vxPw/exec"){
       avisoConfig.style.display = 'block';
       return;
     }
@@ -428,11 +455,7 @@
     btnEnviar.textContent = 'Enviando...';
 
     try {
-      const params = new URLSearchParams(dados);
-      const resposta = await fetch(`${ENDPOINT_URL}?${params.toString()}`, {
-        method: 'GET'
-      });
-      const resultado = await resposta.json();
+      const resultado = await enviarViaJSONP(dados);
 
       document.getElementById('numeroSorteio').textContent = resultado.numero;
       form.classList.add('oculto');
