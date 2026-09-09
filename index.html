@@ -111,6 +111,13 @@
     margin-top: 2px;
   }
   .quem .marca .dc{ color: var(--vinho-claro); }
+  .quem .linkedin-dani{
+    display:inline-block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    font-weight:700;
+    color: var(--vinho);
+  }
   .quem .marca .txt{ color: var(--cinza-texto); font-weight:600; }
 
   .vagas-nota{
@@ -298,12 +305,13 @@
     display:none;
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 <div class="wrap">
 
   <div class="hero">
-    <div class="eyebrow-topo">Os cursos de gestão promovem:</div>
+    <div class="eyebrow-topo">Os cursos de gestão (Administração, Ciências Contábeis, RH e Logística) promovem:</div>
     <div class="eyebrow">Aprenda o poder do</div>
     <h1>LinkedIn<br>na prática</h1>
     <p class="palestra-info">Palestra on-line e gratuita com a especialista</p>
@@ -314,6 +322,7 @@
       <div>
         <div class="nome">Dani Costa</div>
         <div class="marca"><span class="dc">DC</span> <span class="txt">Consultoria</span></div>
+        <a class="linkedin-dani" href="https://www.linkedin.com/in/daniellecostadcconsultoria/" target="_blank" rel="noopener">🔗 LinkedIn da Dani</a>
       </div>
     </div>
 
@@ -374,6 +383,18 @@
       <textarea id="tema" name="tema" placeholder="Sobre o que você gostaria de ver na próxima?"></textarea>
     </div>
 
+    <div class="campo" id="campo-comoSoube">
+      <label>Como você achou o link?</label>
+      <div class="segmentado" style="flex-wrap:wrap">
+        <button type="button" data-valor="Indicação">Indicação</button>
+        <button type="button" data-valor="LinkedIn">LinkedIn</button>
+        <button type="button" data-valor="Instagram">Instagram</button>
+        <button type="button" data-valor="Outro">Outro</button>
+      </div>
+      <input type="hidden" id="comoSoube" name="comoSoube">
+      <span class="erro-msg">Selecione uma opção.</span>
+    </div>
+
     <button type="submit" class="enviar" id="btnEnviar">Confirmar inscrição</button>
   </form>
 
@@ -420,6 +441,19 @@
     });
   });
 
+  const campoComoSoube = document.getElementById('campo-comoSoube');
+  const inputComoSoube = document.getElementById('comoSoube');
+  const botoesComoSoube = campoComoSoube.querySelectorAll('.segmentado button');
+
+  botoesComoSoube.forEach(btn => {
+    btn.addEventListener('click', () => {
+      botoesComoSoube.forEach(b => b.classList.remove('ativo'));
+      btn.classList.add('ativo');
+      inputComoSoube.value = btn.dataset.valor;
+      campoComoSoube.classList.remove('invalido');
+    });
+  });
+
   function marcarErro(campoId, ehInvalido){
     document.getElementById(campoId).classList.toggle('invalido', ehInvalido);
   }
@@ -449,6 +483,9 @@
 
     marcarErro('campo-tel', !validarTelefone(dados.tel));
     if (!validarTelefone(dados.tel)) valido = false;
+
+    marcarErro('campo-comoSoube', dados.comoSoube === '');
+    if (dados.comoSoube === '') valido = false;
 
     return valido;
   }
@@ -510,6 +547,7 @@
       email: document.getElementById('email').value,
       tel: document.getElementById('tel').value,
       tema: document.getElementById('tema').value,
+      comoSoube: document.getElementById('comoSoube').value,
     };
 
     if (!validarFormulario(dados)) return;
