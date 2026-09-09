@@ -1,333 +1,432 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkedIn na Prática</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn na Prática — Inscrição</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap');
 
-  <style>
-    :root{
-      --vinho:#6f2430;
-      --vinho-escuro:#541923;
-      --vinho-claro:#f7edef;
-      --texto-escuro:#2d2426;
-      --cinza-texto:#6d6466;
-      --borda:#ded5d7;
-      --branco:#fff;
-    }
+  :root{
+    --dourado-fundo: #e7c48c;
+    --dourado-claro: #f0d9a8;
+    --dourado-escuro: #c99a5c;
+    --vinho: #6f2430;
+    --vinho-claro: #8a2a35;
+    --off-white: #fbf6ec;
+    --texto-escuro: #4a2418;
+    --cinza-texto: #6b4a35;
+    --erro: #b5303a;
+  }
 
-    *{
-      box-sizing:border-box;
-    }
+  *{box-sizing:border-box; margin:0; padding:0;}
 
-    body{
-      margin:0;
-      background:#faf8f8;
-      color:var(--texto-escuro);
-      font-family:Arial, Helvetica, sans-serif;
-    }
+  body{
+    font-family:'Inter', sans-serif;
+    background: var(--dourado-fundo);
+    background-image:
+      linear-gradient(125deg, rgba(255,255,255,0.35) 0%, transparent 18%, transparent 82%, rgba(255,255,255,0.3) 100%),
+      linear-gradient(115deg, transparent 42%, rgba(255,255,255,0.25) 50%, transparent 58%),
+      linear-gradient(160deg, var(--dourado-claro), var(--dourado-fundo) 45%, var(--dourado-escuro));
+    color: var(--off-white);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding: 0 0 64px;
+  }
 
-    .wrap{
-      max-width:760px;
-      margin:0 auto;
-      padding:24px 18px 50px;
-    }
+  .wrap{ width:100%; max-width: 480px; }
 
-    .hero{
-      text-align:center;
-      background:var(--branco);
-      border-radius:18px;
-      padding:38px 24px 30px;
-      box-shadow:0 8px 30px rgba(0,0,0,.06);
-      margin-bottom:22px;
-    }
+  .hero{
+    padding: 34px 24px 26px;
+    border-bottom: 1px solid rgba(111,36,48,0.25);
+  }
 
-    .eyebrow-topo{
-      color:var(--vinho);
-      font-size:.9rem;
-      font-weight:700;
-      margin-bottom:10px;
-    }
+  .eyebrow-topo{
+    font-size: 0.85rem;
+    font-weight:700;
+    color: var(--vinho);
+    letter-spacing: 0.01em;
+  }
 
-    .eyebrow{
-      font-size:1rem;
-      color:var(--cinza-texto);
-      margin-bottom:4px;
-    }
+  .eyebrow{
+    font-size: 1rem;
+    font-weight:800;
+    color: var(--vinho);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin-top: 2px;
+  }
 
-    h1{
-      margin:0;
-      color:var(--vinho);
-      font-size:clamp(2.5rem,8vw,4.5rem);
-      line-height:.95;
-      letter-spacing:-2px;
-    }
+  h1{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size: clamp(2.6rem, 11vw, 3.5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    color: var(--off-white);
+    text-shadow: 0 2px 10px rgba(74,36,24,0.25);
+    margin-top: 8px;
+  }
 
-    .palestra-info{
-      margin:20px 0 12px;
-      font-size:1.05rem;
-    }
+  .palestra-info{
+    margin-top: 16px;
+    font-size: 1rem;
+    font-weight:700;
+    color: var(--vinho);
+    line-height: 1.5;
+    text-transform: uppercase;
+    max-width: 38ch;
+  }
 
-    .tag-aac{
-      display:inline-block;
-      background:var(--vinho-claro);
-      color:var(--vinho);
-      padding:9px 14px;
-      border-radius:999px;
-      font-size:.85rem;
-      font-weight:700;
-    }
+  .tag-aac{
+    display:inline-block;
+    margin-top: 14px;
+    padding: 6px 12px;
+    border: 1.5px solid var(--vinho);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight:700;
+    color: var(--vinho);
+    background: rgba(255,255,255,0.25);
+  }
 
-    .form-card{
-      background:var(--branco);
-      border-radius:18px;
-      padding:28px 24px;
-      box-shadow:0 8px 30px rgba(0,0,0,.06);
-    }
+  .quem{
+    margin-top: 22px;
+    display:flex;
+    align-items:center;
+    gap: 16px;
+  }
 
-    .campo{
-      margin-bottom:18px;
-    }
+  .quem img{
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--vinho);
+    flex-shrink:0;
+  }
 
-    .campo label{
-      display:block;
-      margin-bottom:7px;
-      font-size:.95rem;
-      font-weight:700;
-    }
+  .quem .nome{
+    font-weight:800;
+    font-size: 1.15rem;
+    color: var(--vinho);
+  }
 
-    .campo input,
-    .campo textarea,
-    .campo select{
-      width:100%;
-      border:1px solid var(--borda);
-      border-radius:10px;
-      padding:13px 14px;
-      font-size:1rem;
-      font-family:inherit;
-      outline:none;
-      background:#fff;
-      color:var(--texto-escuro);
-      transition:border-color .15s ease, box-shadow .15s ease;
-    }
+  .quem .marca{
+    font-size: 0.85rem;
+    font-weight:700;
+    margin-top: 2px;
+  }
 
-    .campo input:focus,
-    .campo textarea:focus,
-    .campo select:focus{
-      border-color:var(--vinho);
-      box-shadow:0 0 0 3px rgba(111,36,48,.10);
-    }
+  .quem .marca .dc{
+    color: var(--vinho-claro);
+  }
 
-    .campo textarea{
-      min-height:100px;
-      resize:vertical;
-    }
+  .quem .marca .txt{
+    color: var(--cinza-texto);
+    font-weight:600;
+  }
 
-    .opcional{
-      color:var(--cinza-texto);
-      font-weight:400;
-    }
+  .vagas-nota{
+    margin-top: 20px;
+    font-weight:800;
+    font-size: 0.95rem;
+    color: var(--off-white);
+    text-shadow: 0 1px 6px rgba(74,36,24,0.35);
+  }
 
-    .segmentado{
-      display:flex;
-      gap:10px;
-    }
+  .organizadores{
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(111,36,48,0.3);
+  }
 
-    .segmentado button{
-      flex:1;
-      border:1px solid var(--borda);
-      background:rgba(111,36,48,0.04);
-      color:var(--texto-escuro);
-      font-family:inherit;
-      font-size:.95rem;
-      font-weight:600;
-      cursor:pointer;
-      transition:all .15s ease;
-      padding:12px;
-      border-radius:10px;
-    }
+  .organizadores-label{
+    font-size: 0.72rem;
+    font-weight:800;
+    letter-spacing: 0.08em;
+    color: var(--vinho);
+    margin-bottom: 8px;
+  }
 
-    .segmentado button.ativo{
-      background:var(--vinho);
-      border-color:var(--vinho);
-      color:#fff;
-    }
+  .organizadores img{
+    width: 100%;
+    max-width: 260px;
+    border-radius: 10px;
+    display:block;
+  }
 
-    .condicional{
-      display:none;
-    }
+  .painel{
+    background: var(--off-white);
+    border-radius: 28px 28px 0 0;
+    margin-top: -18px;
+    padding-top: 8px;
+    box-shadow: 0 -8px 30px rgba(74,36,24,0.15);
+  }
 
-    .condicional.aberto{
-      display:block;
-    }
+  form{
+    padding: 32px 24px 0;
+    display:flex;
+    flex-direction:column;
+    gap: 18px;
+  }
 
-    .erro-msg{
-      display:none;
-      margin-top:5px;
-      color:#b42318;
-      font-size:.8rem;
-    }
+  .campo{
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+  }
 
-    .campo.invalido input,
-    .campo.invalido select,
-    .campo.invalido textarea{
-      border-color:#b42318;
-    }
+  label{
+    font-size: 0.85rem;
+    font-weight:700;
+    color: var(--texto-escuro);
+  }
 
-    .campo.invalido .erro-msg{
-      display:block;
-    }
+  label .opcional{
+    color: var(--cinza-texto);
+    font-weight:400;
+  }
 
-    .enviar{
-      width:100%;
-      border:0;
-      background:var(--vinho);
-      color:#fff;
-      border-radius:12px;
-      padding:16px;
-      font-size:1.05rem;
-      font-weight:700;
-      font-family:inherit;
-      cursor:pointer;
-      transition:transform .12s ease, filter .12s ease;
-    }
+  input[type="text"], input[type="email"], input[type="tel"], textarea{
+    background: rgba(111,36,48,0.05);
+    border: 1.5px solid rgba(111,36,48,0.18);
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-size: 1rem;
+    color: var(--texto-escuro);
+    font-family: inherit;
+    transition: border-color .15s ease, background .15s ease;
+  }
 
-    .enviar:hover{
-      filter:brightness(1.08);
-    }
+  input::placeholder, textarea::placeholder{
+    color: rgba(74,36,24,0.35);
+  }
 
-    .enviar:active{
-      transform:scale(.98);
-    }
+  input:focus, textarea:focus{
+    outline: none;
+    border-color: var(--vinho);
+    background: rgba(111,36,48,0.08);
+  }
 
-    .enviar:disabled{
-      opacity:.6;
-      cursor:wait;
-    }
+  textarea{
+    resize: vertical;
+    min-height: 72px;
+    font-family: inherit;
+  }
 
-    .rodape-nota{
-      margin-top:4px;
-      font-size:.78rem;
-      color:var(--cinza-texto);
-    }
+  /* ADICIONADO: estilo do novo select */
+  #comoSoube{
+    width:100%;
+    background: rgba(111,36,48,0.05);
+    border: 1.5px solid rgba(111,36,48,0.18);
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-size: 1rem;
+    color: var(--texto-escuro);
+    font-family: inherit;
+  }
 
-    .aviso-config{
-      display:none;
-      margin-top:14px;
-      padding:12px 14px;
-      background:#fff4e5;
-      color:#8a4b00;
-      border-radius:10px;
-      font-size:.9rem;
-    }
+  #comoSoube:focus{
+    outline: none;
+    border-color: var(--vinho);
+    background: rgba(111,36,48,0.08);
+  }
 
-    .confirmacao{
-      display:none;
-      text-align:center;
-      background:var(--branco);
-      border-radius:18px;
-      padding:35px 24px;
-      box-shadow:0 8px 30px rgba(0,0,0,.06);
-    }
+  .segmentado{
+    display:flex;
+    gap:10px;
+  }
 
-    .confirmacao.aberto{
-      display:block;
-    }
+  .segmentado button{
+    flex:1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(111,36,48,0.18);
+    background: rgba(111,36,48,0.04);
+    color: var(--texto-escuro);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight:600;
+    cursor:pointer;
+    transition: all .15s ease;
+  }
 
-    .numero-sorteio{
-      color:var(--vinho);
-      font-size:2.5rem;
-      font-weight:800;
-      margin-bottom:12px;
-    }
+  .segmentado button.ativo{
+    background: var(--vinho);
+    border-color: var(--vinho);
+    color: var(--off-white);
+  }
 
-    .cerquilha{
-      font-size:1.2rem;
-    }
+  .condicional{
+    display:none;
+    flex-direction:column;
+    gap: 18px;
+  }
 
-    .confirmacao h2{
-      margin:0 0 8px;
-      color:var(--vinho);
-    }
+  .condicional.aberto{
+    display:flex;
+  }
 
-    .confirmacao p{
-      color:var(--cinza-texto);
-    }
+  .erro-msg{
+    color: var(--erro);
+    font-size: 0.8rem;
+    display:none;
+  }
 
-    .indicar{
-      margin-top:24px;
-      padding-top:20px;
-      border-top:1px solid var(--borda);
-    }
+  .campo.invalido input{
+    border-color: var(--erro);
+  }
 
-    .indicar-texto{
-      font-weight:700;
-      color:var(--texto-escuro) !important;
-    }
+  .campo.invalido .erro-msg{
+    display:block;
+  }
 
-    .botoes-indicar{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
+  .enviar{
+    margin-top: 8px;
+    background-image: linear-gradient(120deg, var(--vinho), #b5432f);
+    color: var(--off-white);
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 1.05rem;
+    font-weight:700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform .12s ease, filter .12s ease;
+  }
 
-    .btn-whatsapp,
-    .btn-copiar{
-      display:inline-block;
-      border:0;
-      font-family:inherit;
-      font-size:.9rem;
-      font-weight:700;
-      padding:12px 18px;
-      border-radius:10px;
-      cursor:pointer;
-      text-decoration:none;
-      transition:filter .12s ease, transform .12s ease;
-    }
+  .enviar:hover{
+    filter: brightness(1.08);
+  }
 
-    .btn-whatsapp{
-      background:#25D366;
-      color:#fff;
-    }
+  .enviar:active{
+    transform: scale(0.98);
+  }
 
-    .btn-copiar{
-      background:var(--vinho);
-      color:#fff;
-    }
+  .enviar:disabled{
+    opacity:0.6;
+    cursor:wait;
+  }
 
-    .btn-whatsapp:hover,
-    .btn-copiar:hover{
-      filter:brightness(1.06);
-    }
+  .rodape-nota{
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--cinza-texto);
+    text-align:center;
+  }
 
-    .btn-copiar.copiado{
-      background:#258a55;
-    }
+  .confirmacao{
+    display:none;
+    text-align:center;
+    padding: 60px 24px;
+  }
 
-    .oculto{
-      display:none;
-    }
+  .confirmacao.aberto{
+    display:block;
+  }
 
-    @media(max-width:600px){
-      .wrap{
-        padding:14px 12px 35px;
-      }
+  form.oculto{
+    display:none;
+  }
 
-      .hero{
-        padding:30px 18px 24px;
-      }
+  .numero-sorteio{
+    font-family:'Anton', sans-serif;
+    font-size: 5.5rem;
+    line-height:1;
+    color: var(--vinho);
+    margin: 14px 0 4px;
+  }
 
-      .form-card{
-        padding:22px 18px;
-      }
+  .numero-sorteio .cerquilha{
+    font-size: 2rem;
+    vertical-align: top;
+    color: var(--cinza-texto);
+  }
 
-      h1{
-        letter-spacing:-1px;
-      }
-    }
-  </style>
+  .confirmacao h2{
+    font-family:'Anton', sans-serif;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight:400;
+    color: var(--texto-escuro);
+  }
+
+  .confirmacao p{
+    color: var(--cinza-texto);
+    margin-top: 10px;
+    line-height:1.5;
+    max-width: 34ch;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .indicar{
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(111,36,48,0.18);
+  }
+
+  .indicar-texto{
+    font-size: 0.92rem;
+    color: var(--cinza-texto);
+    margin-bottom: 14px;
+  }
+
+  .botoes-indicar{
+    display:flex;
+    gap: 10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .btn-whatsapp, .btn-copiar{
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight:700;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor:pointer;
+    text-decoration:none;
+    transition: filter .12s ease, transform .12s ease;
+  }
+
+  .btn-whatsapp{
+    background: #25D366;
+    color: #0b3d20;
+    border: none;
+  }
+
+  .btn-copiar{
+    background: transparent;
+    color: var(--texto-escuro);
+    border: 1.5px solid rgba(111,36,48,0.25);
+  }
+
+  .btn-whatsapp:hover, .btn-copiar:hover{
+    filter: brightness(1.08);
+  }
+
+  .btn-whatsapp:active, .btn-copiar:active{
+    transform: scale(0.97);
+  }
+
+  .btn-copiar.copiado{
+    border-color: var(--vinho);
+    color: var(--vinho);
+  }
+
+  .aviso-config{
+    margin: 0 24px 24px;
+    background: rgba(181,48,58,0.08);
+    border: 1px solid rgba(181,48,58,0.3);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 0.82rem;
+    color: var(--erro);
+    display:none;
+  }
+</style>
 </head>
 
 <body>
@@ -335,161 +434,201 @@
 <div class="wrap">
 
   <div class="hero">
+
     <div class="eyebrow-topo">Os cursos de gestão promovem:</div>
+
     <div class="eyebrow">Aprenda o poder do</div>
+
     <h1>LinkedIn<br>na prática</h1>
-    <p class="palestra-info">Palestra on-line e gratuita com a especialista</p>
-    <div class="tag-aac">Vale horas complementares (AAC) para estudantes</div>
+
+    <p class="palestra-info">
+      Palestra on-line e gratuita com a especialista
+    </p>
+
+    <div class="tag-aac">
+      Vale horas complementares (AAC) para estudantes
+    </div>
+
+    <div class="quem">
+
+      <img src="data:image/png;base64,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" alt="Estácio Campos dos Goytacazes e LPG">
+
+    </div>
   </div>
 
-  <div class="form-card">
+  <div class="painel">
 
-    <form id="formInscricao">
+  <form id="formInscricao" novalidate>
 
-      <div class="campo" id="campo-nome">
-        <label for="nome">Nome completo</label>
-        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name">
-        <span class="erro-msg">Digite seu nome completo.</span>
-      </div>
-
-      <div class="campo" id="campo-estudante">
-        <label>Você é estudante?</label>
-
-        <div class="segmentado">
-          <button type="button" data-valor="Sim">Sim</button>
-          <button type="button" data-valor="Não">Não</button>
-        </div>
-
-        <input type="hidden" id="estudante" name="estudante">
-        <span class="erro-msg">Selecione uma opção.</span>
-      </div>
-
-      <div class="condicional" id="bloco-estudante">
-
-        <div class="campo" id="campo-curso">
-          <label for="curso">Curso</label>
-          <input
-            type="text"
-            id="curso"
-            name="curso"
-            placeholder="Ex.: Administração, Ciências Contábeis, RH ou Logística">
-          <span class="erro-msg">Informe o curso.</span>
-        </div>
-
-        <div class="campo" id="campo-instituicao">
-          <label for="instituicao">Instituição</label>
-          <input
-            type="text"
-            id="instituicao"
-            name="instituicao"
-            placeholder="Ex.: Estácio de Sá">
-          <span class="erro-msg">Informe a instituição.</span>
-        </div>
-
-      </div>
-
-      <div class="campo" id="campo-email">
-        <label for="email">E-mail</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="voce@email.com"
-          autocomplete="email">
-        <span class="erro-msg">Digite um e-mail válido.</span>
-      </div>
-
-      <div class="campo" id="campo-tel">
-        <label for="tel">Telefone</label>
-        <input
-          type="tel"
-          id="tel"
-          name="tel"
-          placeholder="(00) 00000-0000"
-          autocomplete="tel">
-        <span class="erro-msg">Digite um telefone válido.</span>
-      </div>
-
-      <!-- NOVO CAMPO -->
-      <div class="campo" id="campo-comoSoube">
-        <label for="comoSoube">Como ficou sabendo da palestra?</label>
-
-        <select id="comoSoube" name="comoSoube">
-          <option value="">Selecione uma opção</option>
-          <option value="Indicação">Indicação</option>
-          <option value="LinkedIn">LinkedIn</option>
-          <option value="Instagram">Instagram</option>
-          <option value="WhatsApp">WhatsApp</option>
-          <option value="Site">Site</option>
-          <option value="Outro">Outro</option>
-        </select>
-      </div>
-
-      <div class="campo">
-        <label for="tema">
-          Sugestão de tema para a próxima palestra
-          <span class="opcional">(opcional)</span>
-        </label>
-
-        <textarea
-          id="tema"
-          name="tema"
-          placeholder="Sobre o que você gostaria de ver na próxima?"></textarea>
-      </div>
-
-      <button type="submit" class="enviar" id="btnEnviar">
-        Confirmar inscrição
-      </button>
-
-    </form>
-
-    <div class="aviso-config" id="avisoConfig">
-      Este formulário ainda não está conectado à planilha de inscrições.
-      Veja as instruções de configuração para ativar o envio e o sorteio automático.
+    <div class="campo" id="campo-nome">
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name">
+      <span class="erro-msg">Digite seu nome completo.</span>
     </div>
 
-    <div class="confirmacao" id="telaConfirmacao">
+    <div class="campo" id="campo-estudante">
+      <label>Você é estudante?</label>
 
-      <div class="numero-sorteio">
-        <span class="cerquilha">nº</span>
-        <span id="numeroSorteio">--</span>
+      <div class="segmentado">
+        <button type="button" data-valor="Sim">Sim</button>
+        <button type="button" data-valor="Não">Não</button>
       </div>
 
-      <h2>Você está na lista!</h2>
+      <input type="hidden" id="estudante" name="estudante">
 
-      <p>
-        Guarde esse número — ele será usado para um sorteio!.
+      <span class="erro-msg">Selecione uma opção.</span>
+    </div>
+
+    <div class="condicional" id="bloco-estudante">
+
+      <div class="campo" id="campo-curso">
+        <label for="curso">Curso</label>
+
+        <input
+          type="text"
+          id="curso"
+          name="curso"
+          placeholder="Ex.: Administração, Ciências Contábeis, RH ou Logística">
+
+        <span class="erro-msg">Informe o curso.</span>
+      </div>
+
+      <div class="campo" id="campo-instituicao">
+        <label for="instituicao">Instituição</label>
+
+        <input
+          type="text"
+          id="instituicao"
+          name="instituicao"
+          placeholder="Ex.: Estácio de Sá">
+
+        <span class="erro-msg">Informe a instituição.</span>
+      </div>
+
+    </div>
+
+    <div class="campo" id="campo-email">
+      <label for="email">E-mail</label>
+
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="voce@email.com"
+        autocomplete="email">
+
+      <span class="erro-msg">Digite um e-mail válido.</span>
+    </div>
+
+    <div class="campo" id="campo-tel">
+      <label for="tel">Telefone</label>
+
+      <input
+        type="tel"
+        id="tel"
+        name="tel"
+        placeholder="(00) 00000-0000"
+        autocomplete="tel">
+
+      <span class="erro-msg">Digite um telefone válido.</span>
+    </div>
+
+    <!-- ADICIONADO -->
+    <div class="campo" id="campo-comoSoube">
+
+      <label for="comoSoube">
+        Como ficou sabendo da palestra?
+      </label>
+
+      <select id="comoSoube" name="comoSoube">
+
+        <option value="">Selecione uma opção</option>
+
+        <option value="Indicação">Indicação</option>
+
+        <option value="LinkedIn">LinkedIn</option>
+
+        <option value="Instagram">Instagram</option>
+
+        <option value="WhatsApp">WhatsApp</option>
+
+        <option value="Site">Site</option>
+
+        <option value="Outro">Outro</option>
+
+      </select>
+
+    </div>
+
+    <div class="campo">
+
+      <label for="tema">
+        Sugestão de tema para a próxima palestra
+        <span class="opcional">(opcional)</span>
+      </label>
+
+      <textarea
+        id="tema"
+        name="tema"
+        placeholder="Sobre o que você gostaria de ver na próxima?"></textarea>
+
+    </div>
+
+    <button type="submit" class="enviar" id="btnEnviar">
+      Confirmar inscrição
+    </button>
+
+  </form>
+
+  <div class="aviso-config" id="avisoConfig">
+
+    Este formulário ainda não está conectado à planilha de inscrições.
+    Veja as instruções de configuração para ativar o envio e o sorteio automático.
+
+  </div>
+
+  <div class="confirmacao" id="telaConfirmacao">
+
+    <div class="numero-sorteio">
+      <span class="cerquilha">nº</span>
+      <span id="numeroSorteio">--</span>
+    </div>
+
+    <h2>Você está na lista!</h2>
+
+    <p>
+      Guarde esse número — ele será usado para um sorteio!.
+    </p>
+
+    <div class="indicar">
+
+      <p class="indicar-texto">
+        Chama um amigo pra ir junto:
       </p>
 
-      <div class="indicar">
+      <div class="botoes-indicar">
 
-        <p class="indicar-texto">
-          Chama um amigo pra ir junto:
-        </p>
+        <a
+          id="btnWhatsapp"
+          class="btn-whatsapp"
+          href="#"
+          target="_blank"
+          rel="noopener">
+          Chamar no WhatsApp
+        </a>
 
-        <div class="botoes-indicar">
-
-          <a
-            id="btnWhatsapp"
-            class="btn-whatsapp"
-            href="#"
-            target="_blank"
-            rel="noopener">
-            Chamar no WhatsApp
-          </a>
-
-          <button
-            type="button"
-            id="btnCopiar"
-            class="btn-copiar">
-            Copiar link
-          </button>
-
-        </div>
+        <button
+          type="button"
+          id="btnCopiar"
+          class="btn-copiar">
+          Copiar link
+        </button>
 
       </div>
 
     </div>
+
+  </div>
 
   </div>
 
@@ -500,22 +639,33 @@
   const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbx0FFb4ComIiE-8RfG4WbzZEguvCijDmZzJQu7mJIzG7n6qZI1HW0PAqqQm_gv66-vxPw/exec";
 
   const form = document.getElementById('formInscricao');
+
   const btnEnviar = document.getElementById('btnEnviar');
+
   const avisoConfig = document.getElementById('avisoConfig');
+
   const blocoEstudante = document.getElementById('bloco-estudante');
+
   const campoEstudante = document.getElementById('campo-estudante');
+
   const inputEstudante = document.getElementById('estudante');
-  const botoesSegmentado = campoEstudante.querySelectorAll('.segmentado button');
+
+  const botoesSegmentado =
+    campoEstudante.querySelectorAll('.segmentado button');
+
 
   botoesSegmentado.forEach(btn => {
 
     btn.addEventListener('click', () => {
 
-      botoesSegmentado.forEach(b => b.classList.remove('ativo'));
+      botoesSegmentado.forEach(b =>
+        b.classList.remove('ativo')
+      );
 
       btn.classList.add('ativo');
 
-      inputEstudante.value = btn.dataset.valor;
+      inputEstudante.value =
+        btn.dataset.valor;
 
       campoEstudante.classList.remove('invalido');
 
@@ -533,24 +683,35 @@
 
     document
       .getElementById(campoId)
-      .classList.toggle('invalido', ehInvalido);
+      .classList.toggle(
+        'invalido',
+        ehInvalido
+      );
 
   }
 
 
   function validarEmail(valor){
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      .test(valor);
+
   }
 
 
   function validarTelefone(valor){
-    return valor.replace(/\D/g, '').length >= 10;
+
+    return valor
+      .replace(/\D/g, '')
+      .length >= 10;
+
   }
 
 
   function validarFormulario(dados){
 
     let valido = true;
+
 
     marcarErro(
       'campo-nome',
@@ -592,6 +753,7 @@
     } else {
 
       marcarErro('campo-curso', false);
+
       marcarErro('campo-instituicao', false);
 
     }
@@ -622,12 +784,15 @@
 
   function montarCompartilhamento(nome){
 
-    const primeiroNome = nome.trim().split(' ')[0];
+    const primeiroNome =
+      nome.trim().split(' ')[0];
 
-    const link = window.location.href.split('?')[0];
+    const link =
+      window.location.href.split('?')[0];
 
     const mensagem =
       `${primeiroNome} te chamou pra palestra gratuita "LinkedIn na Prática", com Dani Costa. Bora se inscrever também: ${link}`;
+
 
     document.getElementById('btnWhatsapp').href =
       `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
@@ -643,21 +808,26 @@
 
           await navigator.clipboard.writeText(link);
 
-          btn.textContent = 'Link copiado!';
+          btn.textContent =
+            'Link copiado!';
 
           btn.classList.add('copiado');
 
           setTimeout(() => {
 
-            btn.textContent = 'Copiar link';
+            btn.textContent =
+              'Copiar link';
 
-            btn.classList.remove('copiado');
+            btn.classList.remove(
+              'copiado'
+            );
 
           }, 2200);
 
         } catch (err) {
 
-          btn.textContent = 'Não copiou, copie manual';
+          btn.textContent =
+            'Não copiou, copie manual';
 
         }
 
@@ -673,11 +843,14 @@
       const callbackName =
         'cbInscricao_' + Date.now();
 
+
       const timeout = setTimeout(() => {
 
         limpar();
 
-        reject(new Error('Tempo esgotado'));
+        reject(
+          new Error('Tempo esgotado')
+        );
 
       }, 12000);
 
@@ -694,13 +867,14 @@
       }
 
 
-      window[callbackName] = (resultado) => {
+      window[callbackName] =
+        (resultado) => {
 
-        limpar();
+          limpar();
 
-        resolve(resultado);
+          resolve(resultado);
 
-      };
+        };
 
 
       const params =
@@ -716,13 +890,17 @@
       script.src =
         `${ENDPOINT_URL}?${params.toString()}`;
 
+
       script.onerror = () => {
 
         limpar();
 
-        reject(new Error('Falha ao carregar'));
+        reject(
+          new Error('Falha ao carregar')
+        );
 
       };
+
 
       document.body.appendChild(script);
 
@@ -731,106 +909,120 @@
   }
 
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener(
+    'submit',
+    async (e) => {
 
-    e.preventDefault();
-
-
-    const dados = {
-
-      nome:
-        document.getElementById('nome').value,
-
-      estudante:
-        inputEstudante.value,
-
-      curso:
-        document.getElementById('curso').value,
-
-      instituicao:
-        document.getElementById('instituicao').value,
-
-      email:
-        document.getElementById('email').value,
-
-      tel:
-        document.getElementById('tel').value,
-
-      tema:
-        document.getElementById('tema').value,
-
-      // NOVO
-      comoSoube:
-        document.getElementById('comoSoube').value,
-
-    };
+      e.preventDefault();
 
 
-    if (!validarFormulario(dados))
-      return;
+      const dados = {
+
+        nome:
+          document.getElementById('nome').value,
+
+        estudante:
+          inputEstudante.value,
+
+        curso:
+          document.getElementById('curso').value,
+
+        instituicao:
+          document.getElementById('instituicao').value,
+
+        email:
+          document.getElementById('email').value,
+
+        tel:
+          document.getElementById('tel').value,
+
+        // ADICIONADO
+        comoSoube:
+          document.getElementById('comoSoube').value,
+
+        tema:
+          document.getElementById('tema').value,
+
+      };
 
 
-    if (
-      ENDPOINT_URL ===
-      "COLE_AQUI_A_URL_DO_SEU_WEB_APP"
-    ){
-
-      avisoConfig.style.display = 'block';
-
-      return;
-
-    }
+      if (!validarFormulario(dados))
+        return;
 
 
-    avisoConfig.style.display = 'none';
+      if (
+        ENDPOINT_URL ===
+        "COLE_AQUI_A_URL_DO_SEU_WEB_APP"
+      ){
+
+        avisoConfig.style.display =
+          'block';
+
+        return;
+
+      }
 
 
-    btnEnviar.disabled = true;
-
-    btnEnviar.textContent = 'Enviando...';
-
-
-    try {
-
-      const resultado =
-        await enviarViaJSONP(dados);
+      avisoConfig.style.display =
+        'none';
 
 
-      document.getElementById('numeroSorteio')
-        .textContent = resultado.numero;
-
-
-      form.classList.add('oculto');
-
-      document.getElementById('telaConfirmacao')
-        .classList.add('aberto');
-
-
-      montarCompartilhamento(dados.nome);
-
-
-    } catch (err) {
-
-      console.error(
-        'Erro ao enviar inscrição:',
-        err
-      );
-
-
-      btnEnviar.disabled = false;
+      btnEnviar.disabled = true;
 
       btnEnviar.textContent =
-        'Confirmar inscrição';
+        'Enviando...';
 
 
-      avisoConfig.textContent =
-        'Não foi possível enviar sua inscrição agora. Tente novamente em instantes.';
+      try {
 
-      avisoConfig.style.display = 'block';
+        const resultado =
+          await enviarViaJSONP(dados);
+
+
+        document
+          .getElementById('numeroSorteio')
+          .textContent =
+          resultado.numero;
+
+
+        form.classList.add('oculto');
+
+
+        document
+          .getElementById('telaConfirmacao')
+          .classList.add('aberto');
+
+
+        montarCompartilhamento(
+          dados.nome
+        );
+
+
+      } catch (err) {
+
+        console.error(
+          'Erro ao enviar inscrição:',
+          err
+        );
+
+
+        btnEnviar.disabled =
+          false;
+
+        btnEnviar.textContent =
+          'Confirmar inscrição';
+
+
+        avisoConfig.textContent =
+          'Não foi possível enviar sua inscrição agora. Tente novamente em instantes.';
+
+        avisoConfig.style.display =
+          'block';
+
+      }
 
     }
-
-  });
+  );
 
 </script>
 
